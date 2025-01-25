@@ -2,7 +2,7 @@
 
 import { Card, CardHeader, CardBody, CardFooter } from "@heroui/card";
 import { Button } from "@heroui/button";
-import { getAuth, onAuthStateChanged, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, onAuthStateChanged, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword } from "firebase/auth";
 import { useState, useEffect } from "react";
 import { Input } from "@heroui/input";
 import { User } from "firebase/auth";
@@ -39,27 +39,35 @@ export default function LoginPage() {
     }
   };
 
-  const handleEmailLogin = (e: any) => {
+  const handleEmailLogin = async (e: any) => {
     e.preventDefault();
-    console.log("Login with email:", email, "password:", password);
-    // Implement email/password login logic here
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const loggedInUser = userCredential.user;
+      console.log("Logged in with email and password:", loggedInUser);
+      setUser(loggedInUser);
+    } catch (error) {
+      console.error("Error during email login:", error.message);
+      alert(error.message);
+    }
   };
 
   return (
     <div className="flex items-center justify-center">
       {user ? (
-        <Card className="max-w-md w-full shadow-lg rounded-2xl">
-          <CardHeader className="text-center">
+        <Card className="max-w-md w-full shadow-lg rounded-2xl gap-3">
+          <CardHeader className="text-center flex flex-col gap-3">
             <h1 className="text-xl font-bold">Welcome, {user.displayName || user.email}</h1>
             <p className="text-gray-500">You are logged in.</p>
           </CardHeader>
           <CardBody>
             <Button
+              color="danger"
               onPress={() => {
                 auth.signOut();
                 setUser(null);
               }}
-              className="w-full bg-red-500 hover:bg-red-600 text-white"
+              
             >
               Logout
             </Button>
@@ -94,12 +102,14 @@ export default function LoginPage() {
             </Button>
           </form>
           <div className="my-4 text-center text-gray-500">or</div>
-          <Button
-            onPress={handleGoogleLogin}
-            className="w-full bg-red-500 hover:bg-red-600 text-white"
-          >
-            Continue with Google
-          </Button>
+          <div className="flex flex-col gap-2">
+            <Button
+              onPress={handleGoogleLogin}
+              color="secondary"
+            >
+              Login with Google
+            </Button>
+          </div>
         </CardBody>
         <CardFooter className="text-center">
         </CardFooter>
