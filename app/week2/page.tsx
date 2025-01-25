@@ -2,11 +2,12 @@
 
 import { Card, CardHeader, CardBody, CardFooter } from "@heroui/card";
 import { Button } from "@heroui/button";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { useState } from "react";
+import { getAuth, onAuthStateChanged, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import { Input } from "@heroui/input";
+import { User } from "firebase/auth"
 import app from "../../firebaseConfig.js";
-import { useRouter } from "next/router.js";
 
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
@@ -14,19 +15,35 @@ const provider = new GoogleAuthProvider();
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [user, setUser] = useState<User | null>(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        setUser(currentUser);
+        router.push("/week2");
+      } else {
+        setUser(null);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   const handleGoogleLogin = async () => {
     try {
       const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-      console.log("Logged in user:", user);
-      useRouter().push("/profile")
+      const loggedInUser = result.user;
+      console.log("Logged in user:", loggedInUser);
+      setUser(loggedInUser);
+      router.push("/week2");
     } catch (error) {
       console.error("Error during Google login:", error);
     }
   };
 
-  const handleEmailLogin = (e) => {
+  const handleEmailLogin = (e: any) => {
     e.preventDefault();
     console.log("Login with email:", email, "password:", password);
     // Implement email/password login logic here
@@ -34,6 +51,25 @@ export default function LoginPage() {
 
   return (
     <div className="flex items-center justify-center">
+      {user ? (
+        <Card className="max-w-md w-full shadow-lg rounded-2xl">
+          <CardHeader className="text-center">
+            <h1 className="text-xl font-bold">Welcome, {user.displayName || user.email}</h1>
+            <p className="text-gray-500">You are logged in.</p>
+          </CardHeader>
+          <CardBody>
+            <Button
+              onPress={() => {
+                auth.signOut();
+                setUser(null);
+              }}
+              className="w-full bg-red-500 hover:bg-red-600 text-white"
+            >
+              Logout
+            </Button>
+          </CardBody>
+        </Card>
+      ) : (
       <Card className="max-w-md w-full shadow-lg rounded-2xl">
         <CardHeader className="text-center flex flex-col items-center p-3">
           <h1 className="text-xl font-bold">Welcome Back</h1>
@@ -70,11 +106,9 @@ export default function LoginPage() {
           </Button>
         </CardBody>
         <CardFooter className="text-center">
-          <p className="text-sm text-gray-500">
-            Don&#39;t have an account? <a href="/signup" className="text-blue-500">Sign Up</a>
-          </p>
         </CardFooter>
       </Card>
+      )}
     </div>
   );
 }

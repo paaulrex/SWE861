@@ -14,10 +14,7 @@ import clsx from "clsx";
 
 import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
-import {
-  GithubIcon,
-  HeartFilledIcon,
-} from "@/components/icons";
+import { GithubIcon, HeartFilledIcon} from "@/components/icons";
 
 export const Navbar = () => {
   // const searchInput = (
@@ -72,10 +69,16 @@ export const Navbar = () => {
         justify="end"
       >
         <NavbarItem className="hidden sm:flex gap-2">
-          <Link isExternal aria-label="Portfolio" href={siteConfig.links.portfolio}>
+          <Link 
+            isExternal aria-label="Portfolio"
+            href={siteConfig.links.portfolio}
+          >
             <HeartFilledIcon className="text-default-500" />
           </Link>
-          <Link isExternal aria-label="Github" href={siteConfig.links.github}>
+          <Link 
+            isExternal aria-label="Github" 
+            href={siteConfig.links.github}
+          >
             <GithubIcon className="text-default-500" />
           </Link>
           <ThemeSwitch />
@@ -83,7 +86,10 @@ export const Navbar = () => {
       </NavbarContent>
 
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
-        <Link isExternal aria-label="Github" href={siteConfig.links.github}>
+        <Link 
+          isExternal aria-label="Github" 
+          href={siteConfig.links.github}
+        >
           <GithubIcon className="text-default-500" />
         </Link>
         <ThemeSwitch />
