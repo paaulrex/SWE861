@@ -47,8 +47,8 @@ export default function LoginPage() {
       console.log("Logged in with email and password:", loggedInUser);
       setUser(loggedInUser);
     } catch (error) {
-      console.error("Error during email login:", error.message);
-      alert(error.message);
+      console.error("Error during email login:", error);
+      alert(error);
     }
   };
 
