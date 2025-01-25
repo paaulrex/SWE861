@@ -4,9 +4,8 @@ import { Card, CardHeader, CardBody, CardFooter } from "@heroui/card";
 import { Button } from "@heroui/button";
 import { getAuth, onAuthStateChanged, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
 import { Input } from "@heroui/input";
-import { User } from "firebase/auth"
+import { User } from "firebase/auth";
 import app from "../../firebaseConfig.js";
 
 const auth = getAuth(app);
@@ -16,13 +15,11 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState<User | null>(null);
-  const router = useRouter();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
         setUser(currentUser);
-        router.push("/week2");
       } else {
         setUser(null);
       }
@@ -37,7 +34,6 @@ export default function LoginPage() {
       const loggedInUser = result.user;
       console.log("Logged in user:", loggedInUser);
       setUser(loggedInUser);
-      router.push("/week2");
     } catch (error) {
       console.error("Error during Google login:", error);
     }
