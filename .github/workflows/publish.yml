@@ -29,6 +29,14 @@ jobs:
         uses: actions/configure-pages@v4
         with:
           static_site_generator: next
+        env: 
+          NEXT_PUBLIC_FBASE_API_KEY: ${{ secrets.NEXT_PUBLIC_FBASE_API_KEY }}
+          NEXT_PUBLIC_FBASE_AUTH_DOMAIN: ${{ secrets.NEXT_PUBLIC_FBASE_AUTH_DOMAIN }}
+          NEXT_PUBLIC_FBASE_PRID: ${{ secrets.NEXT_PUBLIC_FBASE_PRID }}
+          NEXT_PUBLIC_FBASE_STB: ${{ secrets.NEXT_PUBLIC_FBASE_STB }}
+          NEXT_PUBLIC_FBASE_MSGS_ID: ${{ secrets.NEXT_PUBLIC_FBASE_MSGS_ID }}
+          NEXT_PUBLIC_FBASE_APP_ID: ${{ secrets.NEXT_PUBLIC_FBASE_APP_ID }}
+
 
       - name: Build with Next.js 🏗️
         run: npx next build
