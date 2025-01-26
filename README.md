@@ -15,7 +15,7 @@ This repository contains the implementation of features for a web application fo
     - [Setup Instruction](#setup-instruction)
     - [Setting Up GitHub Pages](#setting-up-github-pages)
     - [Social Media Authentication](#social-media-authentication)
-    - [Disconnect Google Account from this project](#disconnect-google-account-from-this-project)
+    - [Account Disconnection Instructions](#account-disconnection-instructions)
 
 
 ## Technologies Used
@@ -91,7 +91,9 @@ This repository contains the implementation of features for a web application fo
 
 <small>**Note:** Your information does get stored in Indexed DB, firebaseLocalStorage. Your email gets stored in **my** firebase authentication, and I check them and delete those accounts/emails daily (if there are any). Please disconnect your account from my project, if you do connect it. Since there is no reason for you to be connected to my project other than for testing purposes.</small>
 
-### Disconnect Google Account from this project
+
+## Account Disconnection Instructions
+#### Disconnect Google Account from this project
 1. Go to your `Google Account`
 2. Go to `Security` tab
 3. Scroll down to see `Your connections to third-party apps & services` block and click `See all connections`.
@@ -100,7 +102,7 @@ This repository contains the implementation of features for a web application fo
 6. Click `Confirm`
 7. Boom! You're disconnected from the project!
 
-### Disconnect GitHub account from this project
+#### Disconnect GitHub account from this project
 1. Go to your Github `Settings`.
 2. Click `Applications` under `Integrations`.
 3. Select & Click `Authorized OAuth Apps`.
