@@ -42,9 +42,16 @@ This repository contains the implementation of features for a web application fo
     3. Click `Build` and then click `Authentication`
     4. Click `Get Started` button, which will then take you to `Sign-in method` tab.
     5. Select `Email` under `Native Providers` and `Google` under `Additional providers`
-    6. *(Optional) Select more additional providers*
-    > <small>**Note:** For the homework, I used only Google authentication. If you want to add more other social media auths, you will need a developer account from their respective domains.
-    </small>
+    6. *(Optional)* Select more additional providers: (For this example, we will use GitHub)
+        1. Select `GitHub` under `Additional providers`
+        2. Click `Enable` button and copy the callback URL
+        3. Go to your GitHub `Settings`
+        4. Select `Developer Settings`
+        5. Create an `OAuth App` and fill out all the information, make sure you **paste** the callback URL in there.
+        6. Add `http://localhost/` and add your domain or GitHub pages link on there, separate them with a `,`
+        7. Retrieve the `Client ID` and `Client Secret` then input it into your Firebase GitHub provider
+        8. Click `Save`
+
 4. **Set up environment variables:**
   Create a `.env.local` file and define the required environment variables:
   <small>**Note:** Feel free to change name as needed, but as for HEROUI Library or NEXTJS, I needed to input "NEXT_PUBLIC_(YOUR_CHOSEN_VAR_NAME)" for my authentication login to work.</small>
@@ -88,8 +95,7 @@ This repository contains the implementation of features for a web application fo
     - The application creates a session for the users and redirects them to the protected resources.
 ![Redirects/changes view of the page to show user credentials](/readme%20pics/4.png)
 
-
-<small>**Note:** Your information does get stored in Indexed DB, firebaseLocalStorage. Your email gets stored in **my** firebase authentication, and I check them and delete those accounts/emails daily (if there are any). Please disconnect your account from my project, if you do connect it. Since there is no reason for you to be connected to my project other than for testing purposes.</small>
+>**Note:** Your information does get stored in Indexed DB, firebaseLocalStorage. Your email gets stored in **my** firebase authentication, and I check them and delete those accounts/emails daily (if there are any). Please disconnect your account from my project, if you do connect it. Since there is no reason for you to be connected to my project other than for testing purposes.
 
 
 ## Account Disconnection Instructions
