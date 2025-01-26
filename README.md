@@ -78,7 +78,7 @@ This repository contains the implementation of features for a web application fo
 ### Steps
 1. **User Initiates Login:**
     - User clicks the 'Continue with Google' button.
-![The Login that shows 'Continue with Google' button](/readme%20pics/1.png)
+![The Login that shows 'Continue with Google' button](/readme%20pics/3.png)
 2. **Redirect to Social Media Authorization Page:**
     - The application redirects thte user to the social media provider's authorization page.
 ![Picture that shows redirection](/readme%20pics/1.png)
