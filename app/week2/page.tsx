@@ -11,7 +11,7 @@ import { getAuth,
 import { useState, useEffect } from "react";
 import { Input } from "@heroui/input";
 import { User } from "firebase/auth";
-import { title } from "@/components/primitives";
+import { subtitle, title } from "@/components/primitives";
 import app from "../../firebaseConfig.js";
 
 const auth = getAuth(app);
@@ -21,6 +21,7 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState<User | null>(null);
+  const [confirmPW, setConfirmPW] = useState("");
   const [isSigningUp, setIsSigningUp] = useState(false);
 
   useEffect(() => {
@@ -46,8 +47,14 @@ export default function LoginPage() {
     }
   };
 
+  const pwValidation = (password: any) => {
+    const pwRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/
+    return pwRegex.test(password)
+  }
+
   const handleEmailLogin = async (e: any) => {
     e.preventDefault();
+
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const loggedInUser = userCredential.user;
@@ -61,6 +68,17 @@ export default function LoginPage() {
 
   const handleEmailSignUp = async (e: any) => {
     e.preventDefault(); // Prevent form submission from reloading the page
+    
+    if (!pwValidation(password)) {
+      alert("Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character.")
+      return
+    }
+
+    if (password !== confirmPW) {
+      alert ("Passwords do not match.")
+      return
+    }
+
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const newUser = userCredential.user;
@@ -77,7 +95,8 @@ export default function LoginPage() {
       {user ? (
         <Card className="max-w-md w-full shadow-lg rounded-2xl gap-3">
           <CardHeader className="text-center flex flex-col gap-3">
-            <h1 className="text-xl font-bold">Welcome, {user.displayName || user.email}</h1>
+            <p className={title({color: "cyan"})}>Welcome!</p>
+            <p className={subtitle()}>{user.displayName || user.email}</p>
             <p className="text-gray-500">You are logged in.</p>
           </CardHeader>
           <CardBody>
@@ -86,6 +105,9 @@ export default function LoginPage() {
               onPress={() => {
                 auth.signOut();
                 setUser(null);
+                setEmail("");
+                setPassword("");
+                setConfirmPW("");
               }}
               
             >
@@ -96,7 +118,7 @@ export default function LoginPage() {
       ) : (
       <Card className="max-w-md w-full shadow-lg rounded-2xl">
         <CardHeader className="text-center flex flex-col items-center p-3">
-          <h1 className={title()}>
+          <h1 className={title({color: "cyan"})}>
             {isSigningUp ? "Create an Account" : "Welcome Back"}
           </h1>
           <p className="text-gray-500 text-sm">
@@ -124,7 +146,17 @@ export default function LoginPage() {
               className="w-full"
               required
             />
-            <Button type="submit" className="w-full">
+            {isSigningUp && (
+              <Input
+                type="password"
+                placeholder="Confirm Password"
+                value={confirmPW}
+                onChange={(e) => setConfirmPW(e.target.value)}
+                className="w-full"
+                required
+              />
+            )}
+            <Button type="submit" className="w-full"          >
               {isSigningUp ? "Sign Up" : "Login"}
             </Button>
           </form>
@@ -134,7 +166,7 @@ export default function LoginPage() {
               onPress={handleGoogleLogin}
               color="secondary"
             >
-              Login with Google
+              Continue with Google
             </Button>
           </div>
         </CardBody>
