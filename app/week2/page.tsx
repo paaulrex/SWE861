@@ -6,6 +6,7 @@ import { getAuth,
   onAuthStateChanged,
   signInWithPopup,
   GoogleAuthProvider,
+  GithubAuthProvider,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword } from "firebase/auth";
 import { useState, useEffect } from "react";
@@ -13,9 +14,11 @@ import { Input } from "@heroui/input";
 import { User } from "firebase/auth";
 import { subtitle, title } from "@/components/primitives";
 import app from "../../firebaseConfig.js";
+import { FaGoogle, FaGithub } from "react-icons/fa";
 
 const auth = getAuth(app);
-const provider = new GoogleAuthProvider();
+const googleProv = new GoogleAuthProvider();
+const githubProv = new GithubAuthProvider();
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -38,7 +41,18 @@ export default function LoginPage() {
 
   const handleGoogleLogin = async () => {
     try {
-      const result = await signInWithPopup(auth, provider);
+      const result = await signInWithPopup(auth, googleProv);
+      const loggedInUser = result.user;
+      console.log("Logged in user:", loggedInUser);
+      setUser(loggedInUser);
+    } catch (error) {
+      console.error("Error during Google login:", error);
+    }
+  };
+
+  const handleGitHubLogin = async () => {
+    try {
+      const result = await signInWithPopup(auth, githubProv);
       const loggedInUser = result.user;
       console.log("Logged in user:", loggedInUser);
       setUser(loggedInUser);
@@ -165,9 +179,19 @@ export default function LoginPage() {
           <div className="flex flex-col gap-2">
             <Button
               onPress={handleGoogleLogin}
-              color="secondary"
+              color="primary"
+              variant="ghost"
             >
+              <FaGoogle />
               Continue with Google
+            </Button>
+            <Button
+              onPress={handleGitHubLogin}
+              color="primary"
+              variant="ghost"
+            >
+              <FaGithub />
+              Continue with Github
             </Button>
           </div>
         </CardBody>
