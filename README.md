@@ -15,6 +15,7 @@ This repository contains the implementation of features for a web application fo
     - [Setup Instruction](#setup-instruction)
     - [Setting Up GitHub Pages](#setting-up-github-pages)
     - [Social Media Authentication](#social-media-authentication)
+    - [Disconnect Google Account from this project](#disconnect-google-account-from-this-project)
 
 
 ## Technologies Used
@@ -86,6 +87,29 @@ This repository contains the implementation of features for a web application fo
 7. **User Session Creation:**
     - The application creates a session for the users and redirects them to the protected resources.
 ![Redirects/changes view of the page to show user credentials](/readme%20pics/4.png)
+
+
+<small>**Note:** Your information does get stored in Indexed DB, firebaseLocalStorage. Your email gets stored in **my** firebase authentication, and I check them and delete those accounts/emails daily (if there are any). Please disconnect your account from my project, if you do connect it. Since there is no reason for you to be connected to my project other than for testing purposes.</small>
+
+### Disconnect Google Account from this project
+1. Go to your `Google Account`
+2. Go to `Security` tab
+3. Scroll down to see `Your connections to third-party apps & services` block and click `See all connections`.
+4. Click `project-sweng861-wk2hw`
+5. Click `Delete all connections you have with project-sweng861-wk2hw`
+6. Click `Confirm`
+7. Boom! You're disconnected from the project!
+
+### Disconnect GitHub account from this project
+1. Go to your Github `Settings`.
+2. Click `Applications` under `Integrations`.
+3. Select & Click `Authorized OAuth Apps`.
+4. Locate `project-sweng861-wk2hw`.
+5. Click `...` then click `Revoke`.
+6. Click `I understand, revoke access` button.
+7. Boom! You're disconnected from the project!
+<small>**Note:** Once you've revoked access, my OAuth App users will be back to 1 (which is just my acccount).
+Alternatively, you can wait until I revoke access.</small>
 
 ## License
 This project is licensed under the [MIT License](LICENSE).
