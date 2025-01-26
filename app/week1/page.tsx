@@ -4,7 +4,7 @@ import { Image } from "@heroui/image";
 export default function CloudImagePage() {
   
   return (
-    <div>
+    <div className="flex flex-col justify-center gap-5">
       <p className={title()}>Cloud Image Upload &#40;S3 Bucket&#41;</p>
       <Image 
             alt="German Shepherd sitting pose"
