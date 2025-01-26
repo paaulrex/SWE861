@@ -62,8 +62,9 @@ export default function LoginPage() {
       setUser(loggedInUser);
     } catch (error) {
       console.error("Error during email login:", error);
-      alert(error);
+      alert('Please try again. If you do not have an account, please sign up.')
     }
+    
   };
 
   const handleEmailSignUp = async (e: any) => {
