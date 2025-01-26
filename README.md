@@ -32,13 +32,13 @@ This repository contains the implementation for a web application that consists 
   npm install
   ```
 3. **Set up Firebase Authentication**
-  1. Sign up using google email
-  2. Create a project
-  3. Click "Build" and then click "Authentication"
-  4. Click "Get started" button
-  5. Click "Email" under "Native providers"
-  6. Choose additional providers
-    <sub><sup>**Note:** For the homework, I used only Google authentication. If you want to add more other social media auths, you will need a developer account from their respective domains.
+    1. Sign up using google email
+    2. Create a project
+    3. Click "Build" and then click "Authentication"
+    4. Click "Get started" button
+    5. Click "Email" under "Native providers"
+    6. Choose additional providers
+    > <sub><sup>**Note:** For the homework, I used only Google authentication. If you want to add more other social media auths, you will need a developer account from their respective domains.
     </sup></sub>
 4. **Set up environment variables:**
   Create a `.env.local` file and define the required environment variables:
