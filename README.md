@@ -70,13 +70,13 @@ This repository contains the implementation of features for a web application fo
 ### Steps
 1. **User Initiates Login:**
     - User clicks the 'Continue with Google' button.
-    ![The Login that shows 'Continue with Google' button](https://swe861-pds.s3.us-east-2.amazonaws.com/3.png)
+![The Login that shows 'Continue with Google' button](https://swe861-pds.s3.us-east-2.amazonaws.com/3.png)
 2. **Redirect to Social Media Authorization Page:**
     - The application redirects thte user to the social media provider's authorization page.
-    ![Picture that shows redirection](https://swe861-pds.s3.us-east-2.amazonaws.com/1.png)
+![Picture that shows redirection](https://swe861-pds.s3.us-east-2.amazonaws.com/1.png)
 3. **User Grants Permission:**
     - The user logs in to their social media account and grants permission to share their profile data.
-    ![Picture showing user granting permission to use their social media account](https://swe861-pds.s3.us-east-2.amazonaws.com/2.png)
+![Picture showing user granting permission to use their social media account](https://swe861-pds.s3.us-east-2.amazonaws.com/2.png)
 4. **Authorization Callback:**
     - The provider redirects back to the application's callback URL with an authorization code.
 5. **Token Exchange:**
